@@ -1,21 +1,17 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, render_template
+from Forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
-  form=RegistrationForm()
-  return render_template("registration.html", title=Register, form=form)
+    form = RegistrationForm()
+    return render_template("registration.html", title='Register', form=form)
 
-
-@app.route("/register")
-def register():
-  form=LoginForm()
-  return render_template("login.html", title=Login, form=form)
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    return render_template("login.html", title='Login', form=form)
 
 if __name__ == "__main__":
-   app.run()
+    app.run(debug=True)
